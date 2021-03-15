@@ -1,7 +1,7 @@
 package main
 
 import (
-	"carsharing-system/cars/pkg/models"
+	"carsharing-system/users/pkg/models"
 	"database/sql"
 	"flag"
 	_ "github.com/go-sql-driver/mysql"
@@ -14,7 +14,7 @@ type App struct {
 }
 
 func main() {
-	addr := flag.String("addr", ":4000", "HTTP network address")
+	addr := flag.String("addr", ":4003", "HTTP network address")
 	dsn := flag.String("dsn", "root:aserty1234@/car_sharing?parseTime=true", "MySQL DSN")
 	flag.Parse()
 

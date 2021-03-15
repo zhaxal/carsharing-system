@@ -1,0 +1,37 @@
+syntax = "proto3";
+package list;
+option go_package = "pb";
+
+message Car {
+    int64 id = 1;
+    string name = 2;
+    int64 price = 3;
+    string available = 4;
+    int64 exp_req = 5;
+}
+
+message User {
+    int64 id = 1;
+    string name = 2;
+    string surname = 3;
+    string birthdate = 4;
+    int64 experience = 5;
+}
+
+message ListUserReq {}
+
+message ListCarReq {}
+
+message ListCarRes {
+    Car car = 1;
+}
+
+message ListUserRes {
+    User user = 1;
+}
+
+service CarService {
+    rpc ListCars(ListCarReq) returns (stream ListCarRes);
+    rpc ListUsers(ListUserReq) returns (stream ListUserRes);
+}
+

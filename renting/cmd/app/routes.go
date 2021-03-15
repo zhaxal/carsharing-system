@@ -9,10 +9,10 @@ import (
 func (app *App) Routes() http.Handler {
 	mux := pat.New()
 
-	mux.Get("/cars/view/all", isAuthorized(app.viewCars))
-	mux.Get("/users/view/all", isAuthorized(app.viewUsers))
+	mux.Get("/rent", http.HandlerFunc(app.SetRent))
 
-	mux.Get("/rents/rent", isAuthorized(app.rent))
+	mux.Get("/cars/view/:id", http.HandlerFunc(app.carsView))
+	mux.Get("/users/view/:id", http.HandlerFunc(app.usersView))
 
 	return LogRequest(SecureHeaders(mux))
 }

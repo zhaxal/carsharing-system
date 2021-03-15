@@ -9,5 +9,7 @@ import (
 func (app *App) Routes() http.Handler {
 	mux := pat.New()
 
+	mux.Get("/user/:id", http.HandlerFunc(app.ShowUser))
+
 	return LogRequest(SecureHeaders(mux))
 }

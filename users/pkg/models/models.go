@@ -9,3 +9,5 @@ type User struct {
 	Birthdate  time.Time
 	Experience int
 }
+
+type Users []*User

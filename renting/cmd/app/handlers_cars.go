@@ -8,9 +8,7 @@ import (
 	"strconv"
 )
 
-
-
-func (app *App) carsView(w http.ResponseWriter, r *http.Request)  {
+func (app *App) carsView(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(r.URL.Query().Get(":id"))
 	if err != nil || id < 1 {
 		app.NotFound(w)
@@ -31,6 +29,5 @@ func (app *App) carsView(w http.ResponseWriter, r *http.Request)  {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s\n", string(contents))
-
+	fmt.Fprint(w, string(contents))
 }

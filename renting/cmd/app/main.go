@@ -1,7 +1,7 @@
 package main
 
 import (
-	"carsharing-system/cars/pkg/models"
+	"carsharing-system/renting/pkg/models"
 	"database/sql"
 	"flag"
 	_ "github.com/go-sql-driver/mysql"
@@ -9,12 +9,20 @@ import (
 	"net/http"
 )
 
+type apis struct {
+	cars  string
+	users string
+}
+
 type App struct {
 	Database *models.Database
+	apis     apis
 }
 
 func main() {
-	addr := flag.String("addr", ":4001", "HTTP network address")
+	addr := flag.String("addr", ":4002", "HTTP network address")
+	carsAPI := flag.String("carsAPI", "http://localhost:4001/car/", "Cars API")
+	usersAPI := flag.String("usersAPI", "http://localhost:4003/user/", "User API")
 	dsn := flag.String("dsn", "root:aserty1234@/car_sharing?parseTime=true", "MySQL DSN")
 	flag.Parse()
 
@@ -23,9 +31,13 @@ func main() {
 
 	app := &App{
 		Database: &models.Database{DB: db},
+		apis: apis{
+			cars:  *carsAPI,
+			users: *usersAPI,
+		},
 	}
 
-	log.Printf("Server listening on %s", *addr)
+	log.Printf("Renting service listening on %s", *addr)
 	err := http.ListenAndServe(*addr, app.Routes())
 	log.Fatal(err)
 

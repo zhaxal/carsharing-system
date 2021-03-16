@@ -13,7 +13,6 @@ import (
 	"net"
 	"os"
 	"os/signal"
-	"strconv"
 )
 
 type CarServiceServer struct {
@@ -82,7 +81,7 @@ func (s *CarServiceServer) ListCars(req *pb.ListCarReq, stream pb.CarService_Lis
 				Id:        int64(data.ID),
 				Name:      data.Name,
 				Price:     int64(data.Price),
-				Available: strconv.FormatBool(data.Available),
+				Available: string(data.Available),
 				ExpReq:    int64(data.ExpReq),
 			},
 		})

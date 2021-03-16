@@ -4,7 +4,7 @@ type Car struct {
 	ID        int
 	Name      string
 	Price     int
-	Available bool
+	Available int
 	ExpReq    int
 }
 
